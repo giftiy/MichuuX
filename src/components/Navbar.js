@@ -1,82 +1,90 @@
-import '../App.css'; // Adjust the import path if needed
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for routing
+import { Navbar as BootstrapNavbar, Nav, NavDropdown, Container } from 'react-bootstrap'; // Use React Bootstrap components
 import logo from '../assets/img/logo.png'; // Make sure this path is correct
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from 'react'; // Import useState for toggler if using React state management later
-import { Nav, Navbar as BootstrapNavbar, NavDropdown, Container } from 'react-bootstrap'; // Optional: Use React Bootstrap components for better integration
+import '../App.css'; // Your custom styles (ensure navbar styles here don't conflict heavily)
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Removed FontAwesome imports as React-Bootstrap's toggler is used by default
+
+// --- Your Service Data (can be kept separate or defined here) ---
+// It's slightly cleaner to define the paths directly here if they differ from simple hash links
+const serviceLinks = [
+    { path: '/services/ict', title: 'Michuu ICT' }, // Use router paths
+    { path: '/services/construction', title: 'Michuu Construction' },
+    { path: '/services/renewable', title: 'Michuu Renewable' },
+    { path: '/services/mining', title: 'Michuu Mining' },
+    { path: '/services/agriculture', title: 'Michuu Agriculture' },
+    { path: '/services/manufacturing', title: 'Michuu Manufacturing' },
+    { path: '/services/import-export', title: 'Michuu Import & Export' },
+    { path: '/services/media', title: 'Michuu Media' },
+    { path: '/services/education', title: 'Michuu Smart Education' },
+    { path: '/services/aid', title: 'Michuu AID Project' }
+];
 
 function Navbar() {
-  // Optional: State management for toggler (Recommended if using React Bootstrap)
-  // const [expanded, setExpanded] = useState(false);
+  // State to control the expanded/collapsed state of the Navbar on mobile
+  const [expanded, setExpanded] = useState(false);
+
+  // Function to close the Navbar when a link is clicked (useful on mobile)
+  const handleNavClose = () => setExpanded(false);
 
   return (
-    // Using standard Bootstrap classes here. If you switch fully to react-bootstrap components,
-    // you might replace this structure with <BootstrapNavbar>, <Nav>, etc.
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark fixed-top"> {/* Added fixed-top for example */}
-      <div className='container'>
-        <a className="navbar-brand" href="#home"> {/* Use #home or actual link */}
-          <img src={logo} width="30" height="30" className="d-inline-block align-top" alt="Michuu Logo" />
+    <BootstrapNavbar
+      bg="dark"         // Background color
+      variant="dark"     // Makes text/icons light for dark background
+      expand="lg"        // Collapse below 'lg' screens
+      fixed="top"        // Keep Navbar fixed at the top
+      expanded={expanded} // Control expanded state
+      onToggle={setExpanded} // Update state when toggler is clicked
+      className="custom-navbar-styles" // Add your own class for specific overrides if needed
+    >
+      <Container> {/* Use Container for proper padding */}
+        {/* Brand Logo/Link */}
+        <BootstrapNavbar.Brand as={Link} to="/" onClick={handleNavClose}>
+          <img
+            src={logo}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="Michuu Logo"
+          />
           {/* Optional: Add Brand Name Text */}
-          {/* <span className="ms-2 text-white">Michuu Group</span> */}
-        </a>
-        {/* Standard Bootstrap Toggler Button */}
-        <button
-          className="navbar-toggler" // Use className
-          type="button"
-          data-bs-toggle="collapse" // Use data-bs-toggle for Bootstrap 5+
-          data-bs-target="#navbarSupportedContent" // Use data-bs-target for Bootstrap 5+
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false" // This should ideally be controlled by state
-          aria-label="Toggle navigation"
-        >
-          <FontAwesomeIcon icon={faBars} className="navbar-toggler-icon-custom" /> {/* Use CSS class for color */}
-        </button>
+          {/* <span className="ms-2">Michuu Group</span> */}
+        </BootstrapNavbar.Brand>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          {/* ms-auto pushes nav items to the right */}
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 px-3"> {/* Use standard padding like px-3 */}
-            <li className="nav-item"> {/* Removed hardcoded 'active' */}
-              <a className="nav-link" href="#home">Home</a> {/* Use #ids or actual links */}
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#about">About</a>
-            </li>
-            {/* Correct Dropdown Structure */}
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#" // Link to '#' or prevent default if handled by JS/React
-                id="navbarDropdownMenuLink"
-                role="button" // Add role="button"
-                data-bs-toggle="dropdown" // Use data-bs-toggle for Bootstrap 5+
-                aria-expanded="false"
-              >
-                Services
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> {/* Use ul for dropdown menu */}
-                <li><a className="dropdown-item" href="#services/ict">Michuu ICT</a></li>
-                <li><a className="dropdown-item" href="#services/construction">Michuu Construction</a></li>
-                <li><a className="dropdown-item" href="#services/renewable">Michuu Renewable</a></li>
-                <li><a className="dropdown-item" href="#services/mining">Michuu Mining</a></li>
-                <li><a className="dropdown-item" href="#services/agriculture">Michuu Agriculture</a></li>
-                <li><a className="dropdown-item" href="#services/manufacturing">Michuu Manufacturing</a></li>
-                <li><a className="dropdown-item" href="#services/import-export">Michuu Import & Export</a></li>
-                <li><a className="dropdown-item" href="#services/media">Michuu Media</a></li>
-                <li><a className="dropdown-item" href="#services/education">Michuu Smart Education</a></li>
-                <li><a className="dropdown-item" href="#services/aid">Michuu AID Project</a></li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#partners">Partners</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#contact">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+        {/* Toggler Button (React-Bootstrap handles the icon) */}
+        <BootstrapNavbar.Toggle aria-controls="responsive-navbar-nav" />
+
+        {/* Collapsible Content */}
+        <BootstrapNavbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ms-auto"> {/* ms-auto pushes items to the right */}
+
+            {/* Standard Links - Use 'href' for same-page scroll, 'as={Link} to' for routes */}
+            <Nav.Link href="#home" onClick={handleNavClose}>Home</Nav.Link>
+            <Nav.Link href="#about" onClick={handleNavClose}>About</Nav.Link>
+
+            {/* Services Dropdown */}
+            <NavDropdown title="Services" id="services-nav-dropdown">
+              {serviceLinks.map((service) => (
+                <NavDropdown.Item
+                  key={service.path}
+                  as={Link}         // Use Link for routing
+                  to={service.path}   // Set the route path
+                  onClick={handleNavClose} // Close navbar on click
+                >
+                  {service.title}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
+
+            {/* More Standard Links */}
+            <Nav.Link href="#partners" onClick={handleNavClose}>Partners</Nav.Link>
+            <Nav.Link href="#contact" onClick={handleNavClose}>Contact Us</Nav.Link>
+
+          </Nav>
+        </BootstrapNavbar.Collapse>
+      </Container>
+    </BootstrapNavbar>
   );
 }
 

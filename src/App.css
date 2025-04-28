@@ -545,3 +545,166 @@
          margin-left: 0.5rem; /* Adjust spacing */
      }
   }
+
+
+ 
+
+  /* src/components/ServiceDetailCard.css */
+
+.service-detail-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  /* padding: 25px 20px; - Replaced by padding on body */
+  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); - Use Bootstrap shadow-sm */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid #e9ecef; /* Lighter border */
+  text-align: left;
+}
+
+.service-detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhanced shadow on hover */
+}
+
+.service-card-icon {
+  color: #0d6efd; /* Bootstrap primary color */
+}
+
+.service-card-icon i {
+  font-size: 2.5rem;
+}
+
+.service-card-title {
+  font-size: 1.2rem; /* Slightly smaller title */
+  font-weight: 600;
+  margin-bottom: 1rem; /* More space below title */
+  color: #343a40; /* Darker grey */
+}
+
+.service-card-list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.9rem; /* Slightly smaller list text */
+  color: #6c757d; /* Bootstrap secondary text color */
+  line-height: 1.6;
+}
+
+.service-card-list li {
+  margin-bottom: 0.5rem; /* Slightly less margin */
+  position: relative;
+  padding-left: 1.5em; /* Space for custom bullet */
+}
+
+.service-card-list li::before {
+  content: '✓'; /* Checkmark */
+  position: absolute;
+  left: 0;
+  color: #198754; /* Bootstrap success color */
+  font-weight: bold;
+  font-size: 1.1em; /* Make checkmark slightly larger */
+  top: -1px; /* Adjust vertical alignment */
+}
+
+
+/* --- Animation Styles --- */
+.service-detail-col {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.service-detail-col.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* src/components/ServiceDetailCard.css */
+
+/* Styling for the card itself */
+.service-detail-card {
+  background-color: #ffffff; /* White background */
+  border-radius: 0.5rem; /* Slightly larger radius */
+  border: 1px solid #e9ecef; /* Standard light border */
+  text-align: left; /* Align content left */
+  overflow: hidden; /* Ensure content respects border radius */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions for hover */
+}
+
+/* Hover effect */
+.service-detail-card:hover {
+  transform: translateY(-6px); /* Slightly more lift */
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1) !important; /* Slightly stronger shadow on hover */
+}
+
+/* Icon styling */
+.service-card-icon {
+  color: #0d6efd; /* Bootstrap primary color */
+}
+.service-card-icon i {
+  font-size: 2.5rem; /* Icon size */
+}
+
+
+
+
+
+/* src/Pages/IctPage.css (or your main CSS file) */
+
+/* Styles for the Hero Section (ensure these are loaded) */
+.hero-block {
+  position: relative; /* Needed for overlay */
+  color: #fff;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Example dark overlay */
+  z-index: 1;
+}
+
+.hero-caption-custom {
+  position: relative; /* To stay above overlay */
+  z-index: 2;
+  padding: 20px; /* Add some padding */
+}
+
+/* Styles for the card image inside the body */
+.card-title-image {
+  display: block; /* Needed for margin auto centering */
+  width: 80px; /* Set desired width */
+  height: 80px; /* Set desired height */
+  object-fit: cover; /* Scale image nicely */
+  border-radius: 50%; /* Make it circular */
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+  margin-bottom: 1rem; /* Space below image */
+  border: 3px solid #fff; /* Optional white border */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional subtle shadow */
+}
+
+/* Optional: Add hover effect to cards */
+.ict-cards-section .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ict-cards-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Ensure card text is centered */
+.ict-cards-section .card-title,
+.ict-cards-section .card-text {
+    text-align: center;
+}
+
+/* Make sure body stretches if needed */
+.ict-cards-section .card-body {
+    min-height: 150px; /* Adjust as needed to ensure consistency */
+}
+

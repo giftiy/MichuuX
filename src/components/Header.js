@@ -33,11 +33,6 @@ const Header = () => {
         {/* Removed typing-effect class as animation is not desired */}
         <h2>{heroContent.title}</h2>
         <p>{heroContent.description}</p>
-        <a className="btn" href={heroContent.link}>
-          Learn More
-          <i className="fas fa-chevron-right ms-2"></i>
-          {/* <FontAwesomeIcon icon={faChevronRight} className="ms-2" /> */}
-        </a>
       </div>
     </section>
   );

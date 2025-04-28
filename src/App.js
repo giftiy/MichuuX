@@ -1,26 +1,53 @@
 import React from 'react';
 
-import Navbar from './components/Navbar';
-import Header from './components/Header'; // Import your Hero component
-import About from './components/About'; // Assuming this is a SEPARATE page/view
-import Services from './components/Services'; // Assuming this is a SEPARATE page/view
+// 1. Import routing components
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// --- Your Existing Component Imports ---
+import Navbar from './components/Navbar';
+import Header from './components/Header';
+import About from './components/About';
+import AppServices from './components/Services'; 
 import Partners from './components/Partners';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+import Ict from './Pages/Ict'; 
+
+
+
 function App() {
   return (
-    <>
-   <Navbar />
-   <Header />
-   <About />
-   <Services />
-   <Partners />
-   <Contact />
-   <Footer />
-   </>
+    <Router>
+      <> 
+        <Navbar />
+        <Routes>
+
+          <Route
+            path="/"
+            element={
+              <>
+                {/* Components to show on the home page */}
+                <Header />
+                <About />
+                <AppServices /> {/* The list of services appears on the home page */}
+                <Partners />
+                <Contact />
+              </>
+            }
+          />
+          <Route path="/Services/Ict" element={<Ict />} />
+          {/* This uses the imported 'Ict' variable, which is correct */}
+
+          
+
+        </Routes>
+
+        {/* Footer is inside Router but outside Routes to appear on all pages */}
+        <Footer />
+      </>
+    </Router>
   );
 }
 
