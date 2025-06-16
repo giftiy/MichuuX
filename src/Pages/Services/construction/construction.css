@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+:root {
+--construction-bg: #f8f9fa;
+--construction-card-bg: #fff;
+--construction-primary: #007bff;  
+--construction-accent: #66b2ff; 
+--construction-text-dark: #343a40;
+--construction-text-light: #6c757d;
+--construction-shadow: 0 8px 25px rgba(23, 23, 98, 0.98);
+--construction-shadow-hover: 0 12px 30px rgba(28, 23, 98, 0.18);
+--construction-font: 'Poppins', sans-serif;
+--border-radius: 12px;
+}
+.construction-page {
+font-family: var(--construction-font);
+background-color: var(--construction-bg);
+color: var(--construction-text-dark);
+}
+/* 1. Hero Section Styling */
+.construction-hero {
+position: relative;
+height: 60vh;
+min-height: 400px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+color: white;
+background-size: cover;
+background-position: center;
+padding: 2rem;
+}
+.hero-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+.hero-content {
+position: relative;
+z-index: 2;
+max-width: 800px;
+}
+.hero-title {
+font-size: clamp(2.5rem, 5vw, 4rem);
+font-weight: 700;
+text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+margin-bottom: 1rem;
+color: white;
+}
+.hero-subtitle {
+font-size: clamp(1rem, 2vw, 1.25rem);
+font-weight: 400;
+line-height: 1.6;
+text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+/* 2. Generic Section Styling */
+.construction-section {
+padding: 4rem 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.section-header {
+text-align: center;
+margin-bottom: 3rem;
+}
+.section-title {
+font-size: 2.5rem;
+font-weight: 700;
+color: var(--construction-text-dark);
+margin-bottom: 0.5rem;
+}
+.section-intro {
+font-size: 1.1rem;
+color: var(--construction-text-light);
+max-width: 600px;
+margin: 0 auto;
+}
+/* 3. Features (What We Offer) Grid */
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1.5rem;
+}
+.feature-card {
+background: var(--construction-card-bg);
+border-radius: var(--border-radius);
+padding: 2rem;
+text-align: center;
+box-shadow: var(--construction-shadow);
+border: 1px solid #e9ecef;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+transform: translateY(-8px);
+box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+.feature-card__icon {
+font-size: 2.5rem;
+color: var(--construction-accent);
+margin-bottom: 1rem;
+}
+.feature-card__title {
+font-size: 1.25rem;
+font-weight: 600;
+margin-bottom: 0.75rem;
+}
+.feature-card__description {
+font-size: 0.95rem;
+color: var(--construction-text-light);
+line-height: 1.6;
+}
+/* 4. Why Us Section Styling */
+.why-us-content {
+display: grid;
+grid-template-columns: 1fr 1fr;
+align-items: center;
+gap: 3rem;
+}
+.why-us-image img {
+width: 100%;
+height: auto;
+border-radius: var(--border-radius);
+box-shadow: var(--construction-shadow);
+object-fit: cover;
+}
+.why-us-list {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+.why-us-list li {
+display: flex;
+align-items: center;
+font-size: 1.1rem;
+margin-bottom: 1.5rem;
+font-weight: 600;
+}
+.why-us-list li i {
+font-size: 1.5rem;
+color: var(--construction-primary);
+margin-right: 1rem;
+width: 30px; /* Aligns the text */
+text-align: center;
+}
+/* 5. Scroll Animation Classes */
+.animate-on-scroll {
+opacity: 0;
+transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.is-visible {
+opacity: 1;
+transform: none;
+}
+.fade-in-up { transform: translateY(30px); }
+.fade-in-down { transform: translateY(-30px); }
+.fade-in-left { transform: translateX(-30px); }
+.fade-in-right { transform: translateX(30px); }
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+.why-us-content {
+grid-template-columns: 1fr;
+}
+}
+@media (max-width: 768px) {
+.construction-section {
+padding: 3rem 1rem;
+}
+.section-title {
+font-size: 2rem;
+}
+} 

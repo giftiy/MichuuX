@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+/* === "DIGITAL CAMPUS" THEME with a new BLUE ACCENT === */
+:root {
+  --primary-white: #fff;
+  --primary-purple: #491762;
+  --primary-light-purple: #6a3b86;
+  --primary-dark-blue: #232931;
+  --primary-light-gray: #f4f7f9; /* A slightly cooler, cleaner gray */
+  --primary-heading-text: #2c3e50;
+  --primary-gray-text: #6c757d;
+  --education-accent-blue: #3498db; /* A bright, friendly blue */
+  --page-font: 'Poppins', sans-serif;
+  --border-radius: 12px;
+  --shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.education-page {
+  font-family: var(--page-font);
+  background-color: var(--primary-light-gray);
+  color: var(--primary-dark-text);
+  overflow-x: hidden;
+}
+
+/* 1. Hero Section Styling */
+.education-hero {
+  position: relative; height: 60vh; min-height: 450px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--primary-white); background-size: cover; background-position: center; padding: 2rem;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-title { font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; }
+.hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 400; line-height: 1.7; text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+
+/* 2. Generic Section Styling */
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-title { font-size: 2.5rem; font-weight: 700; color: var(--primary-heading-text); }
+
+/* 3. The Interactive Accordion Section */
+.services-section { padding: 5rem 2rem; }
+.accordion-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--primary-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden; /* Important for rounded corners */
+}
+.accordion-item:not(:last-child) {
+  border-bottom: 1px solid #e9ecef;
+}
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: var(--primary-white);
+  border: none;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-purple);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.accordion-header:hover { background-color: var(--primary-light-gray); }
+.accordion-header .accordion-icon { font-size: 1.5rem; color: var(--education-accent-blue); width: 25px; }
+.accordion-header .accordion-title { flex-grow: 1; }
+.accordion-header .accordion-chevron { margin-left: auto; transition: transform 0.3s ease; }
+.accordion-header.active .accordion-chevron { transform: rotate(180deg); }
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  padding: 0 1.5rem;
+}
+.accordion-content.open {
+  max-height: 500px; /* Adjust if content is longer */
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+.accordion-list { list-style: none; padding-left: 1rem; border-left: 3px solid var(--education-accent-blue); }
+.accordion-list li { margin-bottom: 0.5rem; color: var(--primary-gray-text); line-height: 1.6; }
+
+/* 4. "Why Us" Section Styling */
+.why-us-section { padding: 5rem 2rem; }
+.why-us-content { display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 4rem; max-width: 1100px; margin: 0 auto; }
+.why-us-image-container img { width: 100%; height: auto; border-radius: var(--border-radius); box-shadow: var(--shadow); }
+.why-us-list-container { display: flex; flex-direction: column; gap: 1.5rem; }
+.why-us-list-container .section-title { text-align: left; margin-bottom: 1rem; }
+.why-us-item { display: flex; align-items: center; gap: 1rem; font-weight: 600; color: var(--primary-purple); font-size: 1.1rem; }
+.why-us-item i { font-size: 1.5rem; color: var(--education-accent-blue); width: 25px; text-align: center; }
+
+/* 5. Animation Classes */
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fade-in-up { transform: translateY(50px); }
+.fade-in-down { transform: translateY(-50px); }
+.fade-in-left { transform: translateX(-50px); }
+.fade-in-right { transform: translateX(50px); }
+
+/* 6. Responsive Design */
+@media (max-width: 900px) {
+  .why-us-content { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  .why-us-list-container .section-title { text-align: center; }
+  .why-us-item { justify-content: center; }
+}
+@media (max-width: 768px) {
+  .services-section { padding: 3rem 1rem; }
+  .section-title { font-size: 2rem; }
+}

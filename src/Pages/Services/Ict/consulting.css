@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+/* === "STRATEGIC CHECKLIST" THEME === */
+:root {
+  --primary-white: #fff;
+  --primary-purple: #007bff;
+  --primary-light-purple: #66b2ff;
+  --primary-dark-blue: #232931;
+  --primary-light-gray: #f4f7f9;
+  --primary-heading-text: #2c3e50;
+  --primary-gray-text: #6c757d;
+  --page-font: 'Poppins', sans-serif;
+  --border-radius: 12px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 12px 35px rgba(106, 59, 134, 0.15);
+}
+
+.consulting-page {
+  font-family: var(--page-font);
+  background-color: var(--primary-light-gray);
+  color: var(--primary-dark-text);
+  overflow-x: hidden;
+}
+
+/* 1. Hero Section Styling */
+.consulting-hero {
+  position: relative; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--primary-white); background-size: cover; background-position: center; padding: 2rem;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+.hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; }
+.hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 400; line-height: 1.7; text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+
+/* 2. Services List Section */
+.services-section { padding: 5rem 2rem; }
+
+
+.services-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.service-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background: var(--primary-white);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border-left: 5px solid transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+}
+.service-item:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: var(--shadow-hover);
+  border-left-color: var(--primary-light-purple);
+}
+
+.service-item-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #e9ecef; /* A very light gray for a watermark effect */
+  line-height: 1;
+}
+
+.service-item-content { flex-grow: 1; }
+.service-item-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-purple);
+  margin: 0.25rem 0 0.5rem 0;
+}
+.service-item-description {
+  font-size: 1rem;
+  color: var(--primary-gray-text);
+  line-height: 1.6;
+}
+
+/* 3. Call to Action Section */
+.cta-section {
+  background-color: var(--primary-purple); color: var(--primary-white); padding: 4rem 2rem; text-align: center;
+}
+.cta-content h2 { font-weight: 700; margin-bottom: 1rem; }
+.cta-content p { max-width: 600px; margin: 0 auto 1.5rem auto; opacity: 0.9; }
+.cta-button {
+  display: inline-block; padding: 12px 30px; background-color: var(--primary-white); color: var(--primary-purple); border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;
+}
+.cta-button:hover { background-color: var(--primary-light-gray); transform: scale(1.05); }
+
+/* 4. Animation Classes */
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fade-in-up { transform: translateY(50px); }
+.fade-in-down { transform: translateY(-50px); }
+.zoom-in { transform: scale(0.9); }
+
+/* 5. Responsive Design */
+@media (max-width: 768px) {
+  .services-section { padding: 3rem 1rem; }
+  .section-title { font-size: 2rem; }
+}

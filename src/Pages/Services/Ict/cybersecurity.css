@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+/* === NEW "SECURE GRID" THEME (Light Mode) === */
+:root {
+  /* Core brand colors */
+  --primary-white: #fff;
+  --primary-purple: #007bff;
+  --primary-light-purple: #66b2ff;
+  --primary-dark-blue: #232931;
+  
+  /* New theme-specific colors */
+  --cyber-bg-light: #f4f7f9; /* A clean, light background */
+  --cyber-card-bg: var(--primary-white);
+  --cyber-text-dark: #2c3e50;
+  --cyber-text-muted: #6c757d;
+  --cyber-accent-blue: #66b2ff; /* A strong, trustworthy blue */
+
+  --page-font: 'Poppins', sans-serif;
+  --border-radius: 12px;
+  --shadow: 0 8px 25px rgba(0, 86, 179, 0.1); /* Shadow tinted with the accent blue */
+  --shadow-hover: 0 12px 30px rgba(0, 86, 179, 0.15);
+}
+
+.cybersecurity-page {
+  font-family: var(--page-font);
+  background-color: var(--cyber-bg-light);
+  color: var(--cyber-text-dark);
+  overflow-x: hidden;
+}
+
+/* 1. Hero Section Styling */
+.cyber-hero {
+  position: relative; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--primary-white); background-size: cover; background-position: center; padding: 2rem;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-title { font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; }
+.hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 400; line-height: 1.7; text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+
+
+/* === STEP 1: DELETING THE OLD LIST AND ADDING THE "SECURE GRID" LAYOUT === */
+
+/* 2. Services Section */
+.services-section { padding: 5rem 2rem; }
+
+
+/* This container now uses a CSS Grid */
+.services-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* This is the new style for a single service card */
+.service-panel {
+  background: var(--cyber-card-bg);
+  border-radius: var(--border-radius);
+  padding: 2.5rem 2rem 2rem 2rem;
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--cyber-accent-blue);
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-panel:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* The icon is now a "shield" badge at the top */
+.panel-icon {
+  position: absolute;
+  top: -35px; /* Pulls the icon up to sit on top of the card */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cyber-accent-blue);
+  color: var(--primary-white);
+  font-size: 2rem;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+  border: 4px solid var(--primary-white);
+}
+
+.panel-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-purple);
+  margin: 1rem 0 0.75rem 0; /* Add margin-top to account for the icon */
+}
+.panel-description {
+  font-size: 1rem;
+  color: var(--cyber-text-muted);
+  line-height: 1.6;
+}
+
+/* 3. Call to Action Section */
+.cta-section { background-color: var(--primary-purple); color: var(--primary-white); padding: 4rem 2rem; text-align: center; margin-top: 3rem; }
+.cta-content h2 { font-weight: 700; margin-bottom: 1rem; color: var(--primary-white); }
+.cta-content p { max-width: 600px; margin: 0 auto 1.5rem auto; opacity: 0.9; }
+.cta-button {
+  display: inline-block; padding: 12px 30px; background-color: var(--primary-white); color: var(--cyber-accent-blue); border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;
+}
+.cta-button:hover { background-color: var(--cyber-bg-light); transform: scale(1.05); }
+
+/* 4. Animation Classes */
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fade-in-up { transform: translateY(50px); }
+.fade-in-down { transform: translateY(-50px); }
+
+/* 5. Responsive Design */
+@media (max-width: 768px) {
+  .services-section { padding: 5rem 1rem; }
+  .section-title { font-size: 2rem; }
+}

@@ -1,710 +1,826 @@
-/* ==================================================
-   Google Font Import
-   ================================================== */
-   @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 /* ==================================================
    CSS Variables (Root) - Purple Theme
    ================================================== */
-   :root {
-     --primary-white: #fff;
-     --primary-purple: #491762;         /* Main purple */
-     --primary-hover-purple: #3a124e;    /* Darker purple for hover */
-     --primary-dark-blue: #2c3e50;      /* Navbar BG / Dark elements */
-     --primary-light-gray: #f8f9fa;     /* Section Backgrounds */
-     --primary-dark-text: #343a40;      /* Default Text */
-     --primary-gray-text: #6c757d;      /* Muted Text / Subtitles */
-   }
+:root {
+  --primary-white: #fff;
+  --primary-purple: #007bff;         /* Main purple */
+  --primary-hover-purple: #0056b3;    /* Darker purple for hover */
+  --primary-light-purple: #66b2ff;    /* Lighter purple for accents */
+  --primary-dark-blue: #232931;      /* Navbar BG / Dark elements / Footer */
+  --primary-light-gray: #f8f9fa;     /* Section Backgrounds */
+  --primary-medium-gray: #e9ecef;   /* Borders, subtle backgrounds */
+  --primary-dark-text: #343a40;      /* Default Text */
+  --primary-gray-text: #6c757d;      /* Muted Text / Subtitles */
+  --primary-heading-text: #2c3e50;   /* For main headings */
+
+  --navbar-height: 65px; /* Define navbar height */
+  --navbar-height-scrolled: 60px;
+
+  --animation-duration-normal: 0.6s;
+  --animation-duration-fast: 0.4s;
+  --animation-duration-slow: 0.8s;
+  --animation-delay-stagger: 0.1s; /* Default stagger delay */
+}
 
 /* ==================================================
    Base Body Styles
    ================================================== */
-   body {
-     font-family: "Roboto Condensed", sans-serif;
-     padding-top: 56px; /* Adjust if navbar height changes */
-     background-color: var(--primary-white);
-     color: var(--primary-dark-text);
-   }
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: var(--primary-white);
+  color: var(--primary-dark-text);
+  overflow-x: hidden;
+  margin: 0;
+  padding-top: var(--navbar-height); /* Account for fixed navbar */
+}
+
+.page-wrapper {
+  min-height: calc(100vh - var(--navbar-height) - 100px); /* Placeholder for footer height */
+}
+
+/* Page sections common styling */
+.page-section {
+  padding: 70px 0;
+}
+@media (max-width: 767.98px) {
+  .page-section { padding: 50px 0; }
+}
+
+
+/* ==================================================
+   General Typography & Helpers
+   ================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-heading-text);
+  font-weight: 700;
+}
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.8rem; }
+h4 { font-size: 1.5rem; }
+
+a {
+  color: var(--primary-purple);
+  text-decoration: none;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+a:hover {
+  color: var(--primary-hover-purple);
+  opacity: 0.85;
+}
+
+p {
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+  font-size: 1rem; /* Base paragraph size */
+}
+.small, small { font-size: 0.9rem; }
+
+.title-holder {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.title-holder h2 {
+  color: var(--primary-heading-text);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+.title-holder h2::after { /* Underline effect for titles */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-purple);
+  border-radius: 2px;
+}
+.title-holder .subtitle {
+  color: var(--primary-gray-text);
+  font-size: 1.1rem;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+}
+
+.bg-light-transparent {
+  background-color: rgba(255, 255, 255, 0.92) !important; /* For cards on dark BG */
+}
+.text-light-emphasis { color: #f0f0f0 !important; } /* For text on dark BG cards */
+
+/* ==================================================
+   Global Animation Styles
+   ================================================== */
+.animate-on-scroll {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-timing-function: ease-out;
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.fade-in { transition-duration: var(--animation-duration-slow); }
+.fade-in-up { transform: translateY(40px); transition-duration: var(--animation-duration-normal); }
+.fade-in-down { transform: translateY(-40px); transition-duration: var(--animation-duration-normal); }
+.fade-in-left { transform: translateX(-40px); transition-duration: var(--animation-duration-normal); }
+.fade-in-right { transform: translateX(40px); transition-duration: var(--animation-duration-normal); }
+.zoom-in { transform: scale(0.9); transition-duration: var(--animation-duration-fast); }
+.zoom-in.is-visible { transform: scale(1); }
+.fade-in-up.is-visible, .fade-in-down.is-visible { transform: translateY(0); }
+.fade-in-left.is-visible { transform: translateX(0); }
+.fade-in-right.is-visible { transform: translateX(0); }
+
 
 /* ==================================================
    Navbar Styles
    ================================================== */
-   .navbar.bg-dark {
-      background-color: rgba(44, 62, 80, 0.95) !important; /* Dark Blue */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      z-index: 1030;
-   }
+.custom-navbar-styles {
+  background-color: var(--primary-dark-blue) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  min-height: var(--navbar-height);
+  transition: transform 0.35s ease-in-out,
+              background-color 0.4s ease-out,
+              min-height 0.3s ease-out,
+              box-shadow 0.4s ease-out;
+  transform: translateY(0);
+  border-bottom: 2px solid transparent;
+}
+.custom-navbar-styles.navbar-scrolled {
+  background-color: var(--primary-dark-blue) !important; /* Slightly darker or same */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  min-height: var(--navbar-height-scrolled);
+  border-bottom-color: var(--primary-purple);
+}
+.custom-navbar-styles.navbar-hidden {
+  transform: translateY(-100%);
+}
 
-   .navbar-brand img {
-     height: 35px;
-     width: auto;
-   }
+.navbar-brand-custom {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  transition: transform 0.3s ease;
+}
+.navbar-brand-custom:hover {
+  transform: scale(1.05);
+}
+.navbar-logo-img {
+  height: 55px;
+  width: 110px;
+  margin-left: -50px;
+}
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin: 0 0.4rem;
+  padding: 0.6rem 0.8rem !important;
+  border-radius: 5px;
+  position: relative;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-item.show .nav-link, /* For dropdown toggle */
+.navbar-nav .nav-link.active { /* If React Router NavLink is used with activeClassName */
+  color: var(--primary-white) !important;
+  background-color: var(--primary-purple);
+}
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem 0.5rem;
+}
+.navbar-toggler:focus { box-shadow: none; }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  transition: transform 0.3s ease;
+}
+.navbar-toggler:hover .navbar-toggler-icon {
+  transform: scale(1.1);
+}
+.dropdown-menu {
+  background-color: var(--primary-dark-blue);
+  border: 1px solid var(--primary-purple);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  margin-top: 0px; /* Flush with navbar */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 0;
+}
+.dropdown-item {
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 0.7rem 1.3rem;
+  font-size: 0.85rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
+}
+.dropdown-item:hover, .dropdown-item:focus, .dropdown-item.active {
+  background-color: var(--primary-purple) !important;
+  color: var(--primary-white) !important;
+  padding-left: 1.6rem;
+}
 
-   .navbar-nav .nav-link {
-     color: var(--primary-white) !important;
-     letter-spacing: 0.04em;
-     text-transform: uppercase;
-     margin: 0 0.5rem;
-     padding: 0.8rem 0.5rem;
-     font-weight: 400;
-     position: relative;
-     transition: color 0.3s ease, border-color 0.3s ease;
-     border-top: 3px solid transparent;
-     border-bottom: 3px solid transparent;
-     cursor: pointer; /* Added cursor pointer */
-   }
 
-   .navbar-nav .nav-link:hover,
-   .navbar-nav .nav-item.show .nav-link,
-   .navbar-nav .nav-item .nav-link.active {
-     color: var(--primary-purple) !important; /* Purple text */
-     border-bottom-color: var(--primary-purple); /* Purple border */
-     border-top-color: transparent; /* Ensure top border stays clear */
-   }
+/* ==================================================
+   Hero Block Styles
+   ================================================== */
+.hero-block {
+  position: relative;
+  min-height: calc(95vh - var(--navbar-height)); /* Full viewport minus navbar */
+  height: calc(95vh - var(--navbar-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  background-color: #222; /* Fallback */
+}
+.hero-video {
+  position: absolute;
+  top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: 0.6; /* Darken video slightly */
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(15, 15, 25, 0.45); /* Darker overlay */
+  z-index: 1;
+}
+.hero-caption-custom {
+  position: relative;
+  z-index: 2;
+  padding: 25px;
+  max-width: 700px;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+.hero-caption-custom h2 {
+  color: var(--primary-white);
+  font-size: 4.5rem; /* Larger */
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  letter-spacing: 1px;
+}
+.hero-caption-custom p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.4rem;
+  margin-bottom: 0;
+  line-height: 1.6;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+}
+@media (max-width: 767.98px) {
+  .hero-caption-custom h2 { font-size: 2.8rem; }
+  .hero-caption-custom p { font-size: 1.1rem; }
+  .hero-block { min-height: calc(80vh - var(--navbar-height)); height: calc(80vh - var(--navbar-height)); }
+}
 
-   /* Navbar Toggler */
-   .navbar-toggler {
-     border: none;
-     padding: 0.25rem 0.5rem;
-   }
-   .navbar-toggler:focus {
-     box-shadow: none;
-     outline: none;
-   }
-   .navbar-toggler-icon-custom { /* Add this class to your FontAwesome Icon */
-     color: var(--primary-white);
-     font-size: 1.5rem;
-     transition: color 0.3s ease;
-   }
-   .navbar-toggler:hover .navbar-toggler-icon-custom {
-     color: var(--primary-purple); /* Use main purple for toggler icon hover */
-   }
+/* ==================================================
+   Hero Feature Boxes Styles
+   ================================================== */
+.hero-features-container {
+  position: relative;
+  margin-top: -90px; /* Pull up more */
+  z-index: 10;
+  padding-bottom: 50px; /* Space after features */
+}
+.feature-box {
+  background-color: var(--primary-white);
+  padding: 2.2rem 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(44, 62, 80, 0.08);
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  border: 1px solid var(--primary-medium-gray);
+}
+.feature-box:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(44, 62, 80, 0.15);
+}
+.feature-icon {
+  color: var(--primary-purple);
+  font-size: 2.8rem; /* Larger icon */
+  margin-bottom: 1.2rem;
+  transition: transform 0.3s ease;
+}
+.feature-box:hover .feature-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600; /* Poppins bold */
+  color: var(--primary-heading-text);
+  margin-bottom: 0.8rem;
+}
+.feature-text {
+  font-size: 0.95rem;
+  color: var(--primary-gray-text);
+  line-height: 1.65;
+  flex-grow: 1;
+  margin-bottom: 0;
+}
 
-   /* Dropdown Menu */
-   .dropdown-menu {
-     background-color: var(--primary-dark-blue);
-     border: none;
-     border-radius: 0 0 5px 5px;
-     margin-top: 3px;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-     padding-top: 0;
-     padding-bottom: 0;
-   }
+/* ==================================================
+   Button Default Styles
+   ================================================== */
+.btn {
+  background-color: var(--primary-purple);
+  border: 2px solid var(--primary-purple);
+  border-radius: 6px;
+  padding: 12px 25px;
+  color: var(--primary-white) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600; /* Poppins bold */
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1; /* For ::before */
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+}
+.btn:hover::before {
+  left: 100%;
+}
+.btn:hover, .btn:focus {
+  background-color: var(--primary-hover-purple);
+  border-color: var(--primary-hover-purple);
+  color: var(--primary-white) !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18);
+  outline: none;
+}
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--primary-purple);
+  color: var(--primary-purple) !important;
+}
+.btn-secondary:hover, .btn-secondary:focus {
+  background-color: var(--primary-hover-purple);
+  border-color: var(--primary-hover-purple);
+  color: var(--primary-white) !important;
+}
+.btn-lg { padding: 15px 32px; font-size: 1rem; }
+.btn-sm { padding: 8px 18px; font-size: 0.8rem; }
 
-   .dropdown-item {
-     color: var(--primary-white);
-     padding: 0.7rem 1.2rem;
-     font-size: 0.9rem;
-     text-transform: uppercase;
-     letter-spacing: 0.03em;
-     transition: background-color 0.3s ease, color 0.3s ease;
-     cursor: pointer; /* Added cursor pointer */
-   }
-
-   .dropdown-item:hover,
-   .dropdown-item:focus {
-     background-color: var(--primary-hover-purple); /* Use hover purple */
-     color: var(--primary-white);
-   }
-
-   /* ==================================================
-      Keyframes (Removed - No longer needed for static hero)
-      ================================================== */
-   /* @keyframes typing { ... } */
-   /* @keyframes blink-caret { ... } */
-   /* @keyframes fadeIn { ... } */
-
-   /* ==================================================
-      Home (Hero Block) Styles - STATIC VERSION
-      ================================================== */
-   .hero-block-static {
-     position: relative;
-     height: 90vh;
-     overflow: hidden;
-     background-size: cover;
-     background-position: center center;
-     background-repeat: no-repeat;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     text-align: center;
-   }
-
-   .hero-overlay {
-     position: absolute;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     background-color: rgba(0, 0, 0, 0.65); /* Adjust darkness 0.0 to 1.0 */
-     z-index: 1;
-   }
-
-   .hero-caption-custom {
-     position: relative;
-     z-index: 2;
-     padding: 30px;
-     max-width: 850px;
-   }
-
-   .hero-caption-custom h2 {
-     font-size: 3rem;
-     font-weight: 700;
-     color: var(--primary-white);
-     text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
-     margin-bottom: 1.5rem;
-   }
-
-   .hero-caption-custom p {
-     font-size: 1.25rem;
-     color: var(--primary-white);
-     text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-     margin-bottom: 2rem;
-     line-height: 1.7;
-   }
-
-   .hero-caption-custom .btn {
-     margin-top: 1rem;
-     padding: 12px 30px;
-     font-size: 1rem;
-     /* Inherits general .btn styles (now purple) */
-   }
-
-   /* ==================================================
-      Button Default Styles - Purple Theme
-      ================================================== */
-   .btn {
-     background-color: var(--primary-purple); /* Use main purple */
-     border: 2px solid var(--primary-purple); /* Use main purple */
-     border-radius: 5px;
-     padding: 10px 22px;
-     color: var(--primary-white);
-     text-transform: uppercase;
-     letter-spacing: 0.08em;
-     font-weight: 700;
-     transition: all 0.3s ease;
-     text-decoration: none;
-     display: inline-block;
-     cursor: pointer;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-   }
-
-   .btn:hover,
-   .btn:focus {
-     background-color: var(--primary-hover-purple); /* CORRECTED: Use hover purple */
-     border-color: var(--primary-hover-purple);    /* CORRECTED: Use hover purple */
-     color: var(--primary-white);
-     transform: translateY(-3px);
-     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-   }
-
-   /* Optional: Secondary Button Style - Purple Theme */
-   .btn-secondary {
-     background-color: transparent;
-     border-color: var(--primary-purple); /* Use main purple */
-     color: var(--primary-purple);       /* Use main purple */
-   }
-   .btn-secondary:hover,
-   .btn-secondary:focus {
-     background-color: var(--primary-hover-purple); /* Use hover purple */
-     border-color: var(--primary-hover-purple);    /* Use hover purple */
-     color: var(--primary-white);
-     transform: translateY(-3px);
-     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-   }
-
- /* ==================================================
-   Services Section Styles - Purple Accents & Animations
+/* ==================================================
+   Services Section Styles
    ================================================== */
 .services-block {
-  padding: 80px 0;
-  background-color: var(--primary-light-gray); /* Ensure variable is defined */
-  overflow-x: hidden; /* Prevent horizontal scrollbars during animation */
+  background-color: var(--primary-light-gray);
 }
-
-.services-block .title-holder {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.services-block .title-holder h2 {
-    color: var(--primary-dark-blue); /* Ensure variable is defined */
-    margin-bottom: 0.75rem;
-    font-weight: 700;
-}
-
-.services-block .title-holder .subtitle {
-    color: var(--primary-gray-text); /* Ensure variable is defined */
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Styling for the column containing the card - for scroll animation */
-.service-card-col {
-  opacity: 0; /* Start hidden */
-  transform: translateY(40px); /* Start slightly lower */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  /* transition-delay is applied inline in the component */
-}
-
-/* When the column becomes visible */
-.service-card-col.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* Base styles for the service card holder */
 .services-block .holder {
-  background-color: var(--primary-white); /* Ensure variable is defined */
-  border-radius: 10px;
-  padding: 35px 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-  border: 2px solid transparent; /* Initial transparent border */
-  /* Define ALL properties you want to transition smoothly */
-  transition: transform 0.3s ease,
-              box-shadow 0.3s ease,
-              border-color 0.4s ease; /* Smooth border color change */
+  background-color: var(--primary-white);
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+  border: 2px solid transparent;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.4s ease;
   display: flex;
   flex-direction: column;
   text-align: center;
   height: 100%;
   cursor: pointer;
 }
-
-/* Selected card style uses Purple */
 .services-block .holder.selected {
-  border-color: var(--primary-purple); /* Ensure variable is defined */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  transform: translateY(-5px) scale(1.02); /* Optional lift/scale */
+  border-color: var(--primary-purple);
+  box-shadow: 0 10px 30px rgba(73, 23, 98, 0.15);
+  transform: translateY(-6px) scale(1.02);
 }
-
-/* Hover effect */
 .services-block .holder:hover {
-   /* Apply hover transform regardless of selection for simplicity */
-   /* Or add logic to only apply if NOT selected: .services-block .holder:not(.selected):hover */
-   transform: translateY(-8px);
-   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
 }
-
-/* Hover effect on selected card (optional refinement) */
 .services-block .holder.selected:hover {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  /* Keep the selected transform or adjust slightly */
-  transform: translateY(-8px) scale(1.02); /* Ensure consistency with hover */
+  transform: translateY(-8px) scale(1.02); /* Keep consistent selected hover lift */
 }
-
-.services-block .icon {
-  margin-bottom: 1.5rem;
-}
-
-/* Service icon uses Purple */
+.services-block .icon { margin-bottom: 1.5rem; }
 .services-block .icon i {
-  font-size: 2.8rem;
-  color: var(--primary-purple); /* Ensure variable is defined */
+  font-size: 3rem; /* Slightly larger */
+  color: var(--primary-purple);
   transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
-
-/* Icon animation on card hover */
 .services-block .holder:hover .icon i {
   transform: scale(1.2) rotate(8deg);
 }
-
-/* --- Styles for h3, p, btn inside .holder --- */
 .services-block .holder h3 {
-  font-size: 1.35rem;
-  color: var(--primary-dark-text); /* Ensure variable is defined */
+  font-size: 1.4rem;
+  color: var(--primary-heading-text);
   margin-bottom: 1rem;
-  font-weight: 700;
+  font-weight: 600; /* Poppins */
 }
-
 .services-block .holder p {
   font-size: 0.95rem;
-  color: var(--primary-gray-text); /* Ensure variable is defined */
+  color: var(--primary-gray-text);
   line-height: 1.7;
   margin-bottom: 1.5rem;
   flex-grow: 1;
 }
-
 .services-block .holder .btn {
   margin-top: auto;
   align-self: center;
-  padding: 10px 25px;
-  /* Uses default purple .btn styles */
 }
-   /* ==================================================
-      About Section Style
-      ================================================== */
-   #about {
-     padding: 80px 0;
-     background-color: var(--primary-white);
-   }
-   #about h2 {
-       color: var(--primary-dark-blue);
-       font-weight: 700;
-       text-align: center;
-       margin-bottom: 3rem;
-   }
-   #about img {
-       display: block;
-       max-width: 100%;
-       height: auto;
-       border-radius: 10px;
-       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-       margin-bottom: 2rem;
-   }
-   #about p {
-       color: var(--primary-gray-text);
-       line-height: 1.8;
-       font-size: 1.05rem;
-       text-align: justify;
-   }
 
-   /* ==================================================
-      Responsive Adjustments - Updated Purple Accents
-      ================================================== */
-   @media (max-width: 991.98px) { /* Medium devices */
-     /* Navbar adjustments */
-     .navbar-nav { margin-top: 1rem; }
-     .navbar-nav .nav-link {
-       margin: 0;
-       padding: 0.8rem 1rem;
-       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-       border-top: none;
-       border-left: 3px solid transparent;
-       transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-     }
-     .navbar-nav .nav-link:hover,
-     .navbar-nav .nav-item .nav-link.active {
-       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-       border-left-color: var(--primary-purple); /* Purple left border */
-       background-color: rgba(255, 255, 255, 0.05);
-       color: var(--primary-purple) !important; /* Purple text */
-     }
-     .dropdown-menu {
-        box-shadow: none; background-color: transparent; margin-top: 0; border-radius: 0;
-     }
-     .dropdown-item { padding-left: 2rem; color: rgba(255,255,255,0.8); }
-     .dropdown-item:hover, .dropdown-item:focus {
-       color: var(--primary-purple) !important; /* Purple text */
-       background-color: transparent;
-     }
+/* ==================================================
+   About Section Style
+   ================================================== */
+#about {
+  background-color: var(--primary-white);
+}
+#about .image-container img {
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  transition: transform 0.4s ease;
+}
+#about .image-container:hover img {
+    transform: scale(1.03);
+}
+#about .image-container.animate img { /* Pulse effect on click */
+  animation: pulseEffect 0.7s ease-in-out;
+}
+@keyframes pulseEffect {
+  0%, 100% { transform: scale(1.03); } /* Start from hover scale if hovered */
+  50% { transform: scale(1.08); }
+}
+#about p {
+  color: var(--primary-dark-text); /* Slightly darker for better readability */
+  font-size: 1.05rem;
+}
+#about p strong { color: var(--primary-purple); }
 
-     /* Hero Adjustments */
-     .hero-caption-custom h2 { font-size: 2.2rem; }
-     .hero-caption-custom p { font-size: 1.1rem; }
-
-     /* Services Adjustments */
-     .services-block { padding: 60px 0; }
-     .services-block .holder { margin-bottom: 1.5rem; }
-   }
-
-   @media (max-width: 767.98px) { /* Small devices */
-     /* Body Padding */
-      body { padding-top: 56px; }
-
-     /* Hero Adjustments */
-     .hero-block-static { height: 85vh; }
-     .hero-caption-custom { padding: 20px; max-width: 90%; }
-     .hero-caption-custom h2 { font-size: 1.9rem; letter-spacing: normal; }
-     .hero-caption-custom p { font-size: 1rem; margin-bottom: 1.5rem; }
-     .hero-caption-custom .btn { padding: 10px 20px; font-size: 0.9rem; }
-
-      /* Services Adjustments */
-      .services-block .holder { padding: 25px 15px; }
-      .services-block .icon i { font-size: 2.5rem; }
-      .services-block .holder h3 { font-size: 1.25rem; }
-      .services-block .holder p { font-size: 0.9rem; }
-
-      /* About Adjustments */
-      #about { padding: 60px 0; }
-      #about p { font-size: 1rem; text-align: left; }
-   }
-
-
-   /* ==================================================
+/* ==================================================
    Partners Section Styles
    ================================================== */
-
 .partner-section {
-  background-color: var(--primary-light-gray); /* Optional: Light background */
-  /* Add other section-specific styles if needed */
+  background-color: clack;
+  overflow: hidden;
+  padding: 6px;
 }
-
-/* Styling for individual logos */
-.partner-logo {
-  /* Add a subtle transition for hover effects */
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: grayscale(0%); /* Start slightly desaturated */
-  opacity: 0.8; /* Start slightly transparent */
-  /* Ensure images don't exceed their container - max sizes set inline */
-}
-
-/* Hover effect for logos */
-.partner-logo-row .col:hover .partner-logo {
-  transform: scale(1.1); /* Slightly enlarge on hover */
-  filter: grayscale(0%); /* Full color on hover */
-  opacity: 1; /* Full opacity on hover */
-}
-
-/* Adjust h1 styling if needed */
 .partner-section h1 {
-  color: var(--primary-dark-blue); /* Match other headings */
+  color: var(--primary-heading-text);
 }
-
-
-/* --- Responsive Adjustments --- */
+.partner-logo-row.has-animation .partner-logo-item.is-visible {
+  opacity: 1;
+  transform: translateY(0); 
+  /* Staggering delays, applied via style prop in component for more control */
+}
+.partner-logo-item {
+  background-color: var(--primary-white);
+  padding: 1.8rem 1.2rem;
+  border-radius: 30px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  border: 1px solid var(--primary-medium-gray);
+  /* Base animation properties already in global .animate-on-scroll */
+  /* Specific transform for partners */
+  opacity: 0;
+  transform: translateY(25px) scale(0.99);
+  transition: opacity var(--animation-duration-normal) ease-out,
+              transform var(--animation-duration-normal) ease-out,
+              box-shadow 0.3s ease-out,
+              border-color 0.3s ease-out;
+}
+.partner-logo-item.is-visible { /* This class is added by useScrollAnimation */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.partner-logo-item:hover {
+  transform: translateY(-6px) scale(1.02); /* Lift effect */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-light-purple);
+}
+.partner-logo {
+  display: block;
+  max-width: 100%;
+  max-height: 50px; /* Slightly smaller max height */
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+  
+  opacity: 0.65;
+  
+  
+}
+.partner-logo-item:hover .partner-logo {
+  transform: scale(1.08);
+  filter: grayscale(0%);
+  opacity: 1;
+}
 @media (max-width: 767.98px) {
-  .partner-logo {
-     max-height: 60px !important; /* Adjust max size for smaller screens */
-     max-width: 120px !important;
-  }
-  .partner-section h1 {
-    font-size: 2rem; /* Adjust heading size */
-  }
-   .partner-logo-row {
-    gap: 1rem; /* Reduce gap slightly */
-  }
+  .partner-logo { max-height: 50px !important; }
+  .partner-logo-item { min-height: 110px; padding: 1.2rem 0.8rem; }
 }
 
+/* ==================================================
+   Contact Section Styles
+   ================================================== */
+.contact-section {
+  background-color: var(--primary-light-gray); /* Consistent with Partners */
+}
+.contact-form-wrapper, .contact-details-wrapper { /* Wrappers for form and details */
+  background-color: var(--primary-white);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+  height: 100%; /* For equal height columns */
+}
+@media (max-width: 991.98px) {
+  .contact-form-wrapper, .contact-details-wrapper { padding: 1.8rem; }
+  .contact-details-wrapper { margin-top: 2rem; }
+}
 
+.contact-map iframe {
+  width: 100%;
+  height: 280px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  filter: grayscale(20%);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+.contact-map iframe:hover {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+.contact-details .detail-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  color: var(--primary-dark-text);
+  font-size: 1rem;
+}
+.contact-details .detail-icon {
+  color: var(--primary-purple);
+  font-size: 1.3rem;
+  margin-right: 1.2rem;
+  width: 22px;
+  text-align: center;
+  padding-top: 3px;
+}
+.contact-details .detail-text a {
+  color: var(--primary-purple);
+  text-decoration: none;
+  font-weight: 500;
+}
+.contact-details .detail-text a:hover {
+  color: var(--primary-hover-purple);
+  text-decoration: underline;
+}
+.contact-section form .form-label {
+  font-weight: 600; /* Poppins */
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-dark-text);
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+.contact-section form .form-control {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  padding: 0.8rem 1.1rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  font-size: 0.95rem;
+}
+.contact-section form .form-control:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 0.25rem rgba(73, 23, 98, 0.2);
+}
+.contact-section form textarea.form-control { min-height: 130px; }
 
 /* ==================================================
    Footer Styles
    ================================================== */
-   .footer-section {
-    background-color: var(--primary-dark-blue); /* Dark background */
-    color: rgba(255, 255, 255, 0.75); /* Slightly brighter default text */
-    border-top: 3px solid var(--primary-purple); /* Optional: Theme color top border */
-  }
-  
-  .footer-section .copyright-text {
-    font-size: 0.9rem;
-  }
-  
-  /* Style footer nav links */
-  .footer-links .nav-link {
-    font-size: 0.9rem;
-    padding: 0.25rem 0.6rem; /* Adjusted padding */
-    color: rgba(255, 255, 255, 0.75) !important; /* Use important to override Nav default */
-    transition: color 0.3s ease;
-    text-transform: uppercase; /* Match navbar potentially */
-    letter-spacing: 0.03em;
-  }
-  
-  .footer-links .nav-link:hover {
-    color: var(--primary-white) !important; /* Brighter white */
-    text-decoration: none; /* Remove underline if preferred */
-  }
-  
-  /* Style social icons container */
-  .social-icons {
-    /* Spacing if needed */
-  }
-  
-  /* Style individual social icon links */
-  .social-icon-link { /* Use the specific class */
-    color: rgba(255, 255, 255, 0.75) !important;
-    transition: color 0.3s ease, transform 0.3s ease;
-    display: inline-block;
-  }
-  
-  .social-icon-link:hover {
-    color: var(--primary-purple) !important; /* Use theme color (purple) on hover */
-    transform: scale(1.2) translateY(-2px); /* Add slight lift */
-  }
-  
-  /* --- Responsive Adjustments for Footer --- */
-  @media (max-width: 767.98px) {
-    .footer-section {
-      text-align: center;
-    }
-    .footer-section .text-md-start,
-    .footer-section .text-md-end {
-      text-align: center !important;
-    }
-    .footer-links {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      justify-content: center !important;
-    }
-     /* Ensure social icons have space */
-     .social-icons {
-       margin-top: 0.5rem;
-     }
-     .social-icons a {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-     }
-     .social-icons a:last-child {
-         margin-right: 0.5rem; /* Adjust spacing */
-     }
-     .social-icons a:first-child {
-         margin-left: 0.5rem; /* Adjust spacing */
-     }
-  }
-
-
- 
-
-  /* src/components/ServiceDetailCard.css */
-
-.service-detail-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  /* padding: 25px 20px; - Replaced by padding on body */
-  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); - Use Bootstrap shadow-sm */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  border: 1px solid #e9ecef; /* Lighter border */
-  text-align: left;
+.main-footer-michuux {
+  background-color: var(--primary-dark-blue);
 }
-
-.service-detail-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhanced shadow on hover */
+.footer-section {
+  padding: 70px 0 35px 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  border-top: 5px solid var(--primary-purple);
 }
-
-.service-card-icon {
-  color: #0d6efd; /* Bootstrap primary color */
+.footer-section h5 {
+  color: var(--primary-white);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.8px;
+  margin-bottom: 1.8rem;
+  font-weight: 600; /* Poppins */
+  font-family: 'Poppins', sans-serif;
 }
-
-.service-card-icon i {
-  font-size: 2.5rem;
+.footer-section .footer-nav-link,
+.footer-section .footer-contact-link { /* Removed .nav-link to avoid conflict */
+  color: rgba(255, 255, 255, 0.75) !important;
+  transition: color 0.25s ease-in-out, padding-left 0.25s ease, letter-spacing 0.25s ease;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 400;
 }
-
-.service-card-title {
-  font-size: 1.2rem; /* Slightly smaller title */
-  font-weight: 600;
-  margin-bottom: 1rem; /* More space below title */
-  color: #343a40; /* Darker grey */
+.footer-section .footer-nav-link:hover,
+.footer-section .footer-contact-link:hover {
+  color: var(--primary-white) !important;
+  padding-left: 8px;
+  letter-spacing: 0.5px;
 }
-
-.service-card-list {
-  list-style: none;
-  padding-left: 0;
-  font-size: 0.9rem; /* Slightly smaller list text */
-  color: #6c757d; /* Bootstrap secondary text color */
-  line-height: 1.6;
+.footer-section address p {
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: flex-start;
 }
-
-.service-card-list li {
-  margin-bottom: 0.5rem; /* Slightly less margin */
-  position: relative;
-  padding-left: 1.5em; /* Space for custom bullet */
+.footer-section address p .fa-fw {
+  width: 1.3em;
+  color: rgba(255, 255, 255, 0.65);
+  margin-right: 0.8rem;
+  padding-top: 4px;
 }
-
-.service-card-list li::before {
-  content: '✓'; /* Checkmark */
-  position: absolute;
-  left: 0;
-  color: #198754; /* Bootstrap success color */
-  font-weight: bold;
-  font-size: 1.1em; /* Make checkmark slightly larger */
-  top: -1px; /* Adjust vertical alignment */
+.footer-section .social-icon-link {
+  color: rgba(255, 255, 255, 0.75) !important;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  font-size: 1.5rem;
+  margin: 0 0.8rem;
+}
+.footer-section .social-icon-link:hover {
+  color: var(--primary-purple) !important;
+  transform: scale(1.2) translateY(-3px);
+}
+.footer-section .border-top { /* Copyright border */
+  border-top-color: rgba(255, 255, 255, 0.15) !important;
+}
+.footer-section .small p { /* Copyright text */
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
 }
 
 
-/* --- Animation Styles --- */
-.service-detail-col {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.service-detail-col.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* src/components/ServiceDetailCard.css */
-
-/* Styling for the card itself */
-.service-detail-card {
-  background-color: #ffffff; /* White background */
-  border-radius: 0.5rem; /* Slightly larger radius */
-  border: 1px solid #e9ecef; /* Standard light border */
-  text-align: left; /* Align content left */
-  overflow: hidden; /* Ensure content respects border radius */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions for hover */
-}
-
-/* Hover effect */
-.service-detail-card:hover {
-  transform: translateY(-6px); /* Slightly more lift */
-  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1) !important; /* Slightly stronger shadow on hover */
-}
-
-/* Icon styling */
-.service-card-icon {
-  color: #0d6efd; /* Bootstrap primary color */
-}
-.service-card-icon i {
-  font-size: 2.5rem; /* Icon size */
-}
-
-
-
-
-
-/* src/Pages/IctPage.css (or your main CSS file) */
-
-/* Styles for the Hero Section (ensure these are loaded) */
-.hero-block {
-  position: relative; /* Needed for overlay */
-  color: #fff;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+/* ==================================================
+   ICT Page & Sub-pages Specific Styles
+   ================================================== */
+.ict-cards-section .ict-service-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Example dark overlay */
-  z-index: 1;
+  border: 1px solid var(--primary-medium-gray);
+  border-radius: 10px;
+  overflow: hidden; /* For image */
 }
-
-.hero-caption-custom {
-  position: relative; /* To stay above overlay */
-  z-index: 2;
-  padding: 20px; /* Add some padding */
+.ict-cards-section .ict-service-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-light-purple);
 }
-
-/* Styles for the card image inside the body */
-.card-title-image {
-  display: block; /* Needed for margin auto centering */
-  width: 80px; /* Set desired width */
-  height: 80px; /* Set desired height */
-  object-fit: cover; /* Scale image nicely */
-  border-radius: 50%; /* Make it circular */
-  margin-left: auto; /* Center horizontally */
-  margin-right: auto; /* Center horizontally */
-  margin-bottom: 1rem; /* Space below image */
-  border: 3px solid #fff; /* Optional white border */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional subtle shadow */
+.ict-card-img {
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
-
-/* Optional: Add hover effect to cards */
-.ict-cards-section .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.ict-cards-section .ict-service-card:hover .ict-card-img {
+  transform: scale(1.05);
 }
-
-.ict-cards-section .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+.ict-cards-section .card-title-ict {
+  font-size: 1.15rem;
+  font-weight: 600; /* Poppins */
+  color: var(--primary-heading-text);
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
 }
-
-/* Ensure card text is centered */
-.ict-cards-section .card-title,
 .ict-cards-section .card-text {
-    text-align: center;
+  font-size: 0.9rem;
 }
 
-/* Make sure body stretches if needed */
-.ict-cards-section .card-body {
-    min-height: 150px; /* Adjust as needed to ensure consistency */
+/* Data Center Page */
+.data-center-page-container .bg-light-transparent { /* Card background on this page */
+  background-color: rgba(248, 249, 250, 0.9) !important;
+}
+.data-center-page-container .text-light-emphasis { color: #333 !important; } /* Darker text on light cards */
+.data-center-page-container .text-light { color: #555 !important; }
+.data-center-page-container .border-light { border-color: rgba(0,0,0,0.15) !important; }
+
+.service-item-card-dc { /* Specific for Data Center cards */
+  border: 1px solid var(--primary-medium-gray);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+  background-color: var(--primary-white);
+  border-radius: 10px;
+  height: 100%;
+  padding: 20px;
+}
+.service-item-card-dc:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-light-purple);
+}
+.service-item-card-dc:hover .fa-icon-dc,
+.service-item-card-dc:hover .card-text {
+  color: var(--primary-white) !important;
+}
+.fa-icon-dc {
+  color: var(--primary-purple) !important; /* Keep important if needed */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.service-item-card-dc:hover .fa-icon-dc {
+  transform: scale(1.1);
 }
 
+/* ==================================================
+   Responsive Adjustments (Simplified - Add more as needed)
+   ================================================== */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: var(--primary-dark-blue);
+    position: absolute; top: 100%; left: 0; width: 100%;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--primary-purple);
+  }
+  .navbar-nav .nav-link {
+    margin: 0; padding: 0.8rem 1.5rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .navbar-nav .nav-link:last-child { border-bottom: none; }
+  .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+    background-color: var(--primary-hover-purple) !important; /* Consistent hover */
+  }
+  .dropdown-menu { box-shadow: none; background-color: transparent; margin-top: 0; border:none; }
+  .dropdown-item { padding-left: 2.2rem; }
+  .dropdown-item:hover { padding-left: 2.5rem; }
+
+  .page-section { padding: 60px 0; }
+  .hero-features-container { margin-top: -70px; }
+  .title-holder h2 { font-size: 2rem; }
+  .title-holder .subtitle { font-size: 1.05rem; }
+  .footer-section { text-align: center; }
+  .footer-section h5 { margin-top: 2rem; }
+  .footer-section h5:first-of-type { margin-top: 0; } /* Corrected selector */
+  .footer-section address p { justify-content: center; }
+}
+
+@media (max-width: 767.98px) {
+  body { padding-top: var(--navbar-height); } /* Ensure this adapts if navbar height changes */
+  .hero-block { min-height: calc(75vh - var(--navbar-height)); height: calc(75vh - var(--navbar-height));}
+  .hero-caption-custom h2 { font-size: 2.4rem; }
+  .hero-caption-custom p { font-size: 1.05rem; }
+  .hero-features-container { margin-top: -60px; }
+  .page-section { padding: 45px 0; }
+  .title-holder h2 { font-size: 1.8rem; }
+  .title-holder .subtitle { font-size: 1rem; }
+  .btn { padding: 10px 20px; font-size: 0.85rem; }
+  .btn-lg { padding: 12px 28px; font-size: 0.95rem; }
+}
+
+@media (max-width: 575.98px) {
+  .hero-block { min-height: calc(70vh - var(--navbar-height)); height: calc(70vh - var(--navbar-height));}
+  .hero-caption-custom { padding: 20px; }
+  .hero-caption-custom h2 { font-size: 2rem; }
+  .hero-caption-custom p { font-size: 0.95rem; }
+  .title-holder h2 { font-size: 1.6rem; }
+  .partner-logo { max-height: 40px !important; }
+  .partner-logo-item { min-height: 90px; }
+}

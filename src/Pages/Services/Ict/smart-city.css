@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+/* === NEW "INNOVATION GRID" THEME (Light Mode) === */
+:root {
+  /* Core brand colors */
+  --primary-white: #fff;
+  --primary-purple: #007bff;
+  --primary-light-purple: #66b2ff;
+  --primary-dark-blue: #0056b3;
+  
+  /* New theme-specific colors */
+  --city-bg-light: #f4f7f9; /* A clean, light background */
+  --city-card-bg: var(--primary-white);
+  --city-text-dark: #090911;
+  --city-accent-blue: #797a97; /* A sharp, professional blue */
+
+  --page-font: 'Poppins', sans-serif;
+  --border-radius: 12px;
+ 
+}
+
+.smart-city-page {
+  font-family: var(--page-font);
+  background-color: var(--city-bg-light);
+  color: var(--city-text-dark);
+  overflow-x: hidden;
+  /* Subtle blueprint grid background */
+ 
+}
+
+/* 1. Hero Section Styling */
+.smart-city-hero {
+  position: relative; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--primary-white); background-size: cover; background-position: center; padding: 2rem;
+}
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; }
+.hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 400; line-height: 1.7; text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+
+
+/* === STEP 1: DELETING THE DARK THEME AND ADDING THE "INNOVATION GRID" === */
+
+/* 2. Solutions Section */
+.solutions-section { 
+  padding: 5rem 2rem; 
+}
+.section-header { 
+  text-align: center; 
+  margin-bottom: 3rem; 
+}
+.section-title { 
+  font-size: 2.5rem; 
+  font-weight: 700; 
+  color: var(--city-text-dark); 
+}
+
+/* This container now uses a standard CSS Grid */
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* This is the new style for a single rectangular service card */
+.solution-panel {
+  background: var(--city-card-bg);
+  border-radius: var(--border-radius);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s ease;
+  border-top: 4px solid var(--city-accent-blue);
+}
+.solution-panel:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+.panel-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: black;
+  margin: 0;
+}
+
+/* 3. Animation Classes */
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fade-in-up { transform: translateY(50px); }
+.fade-in-down { transform: translateY(-50px); }
+.zoom-in { transform: scale(0.9); }
+
+/* 4. Responsive Design */
+@media (max-width: 768px) {
+  .solutions-section { padding: 3rem 1rem; }
+  .section-title { font-size: 2rem; }
+}

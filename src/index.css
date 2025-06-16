@@ -1,0 +1,87 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ==================================================
+   CSS Variables (Root) - Light Theme (YOUR ORIGINAL CODE)
+   ================================================== */
+:root {
+  --primary-white: #fff;
+  --primary-purple: #007bff;
+  --primary-hover-purple: #0056b3;
+  --primary-light-purple: #66b2ff;
+  --primary-dark-blue: #232931;
+  --primary-light-gray: #f8f9fa;
+  --primary-medium-gray: #e9ecef;
+  --primary-dark-text: #343a40;
+  --primary-gray-text: #6c757d;
+  --primary-heading-text: #2c3e50;
+
+  --navbar-height: 65px;
+  --navbar-height-scrolled: 60px;
+  --animation-duration-normal: 0.6s;
+  --animation-duration-fast: 0.4s;
+  --animation-duration-slow: 0.8s;
+  --animation-delay-stagger: 0.1s;
+}
+
+/* ==================================================
+   Dark Mode Variable Overrides
+   ================================================== */
+body.dark-mode {
+  --primary-white: #121212;
+  --primary-purple: #bb86fc;
+  --primary-hover-purple: #d0aaff;
+  --primary-light-purple: #a764e8;
+  --primary-dark-blue: #181818;
+  --primary-light-gray: #1a1a1a;
+  --primary-medium-gray: #3a3a3a;
+  --primary-dark-text: #e0e0e0;
+  --primary-gray-text: #a0a0a0;
+  --primary-heading-text: #f5f5f5;
+}
+
+/* ==================================================
+   Base Body & Global Styles
+   ================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: var(--primary-white);
+  color: var(--primary-dark-text);
+  overflow-x: hidden;
+  margin: 0;
+  padding-top: var(--navbar-height);
+  /* Smooth transition for theme switching */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Make all components transition smoothly */
+.page-section, .feature-box, .services-block .holder, .contact-form-wrapper,
+.contact-details-wrapper, .main-footer-michuux, .custom-navbar-styles,
+.dropdown-menu, .btn, form .form-control, .ict-cards-section .ict-service-card,
+.service-item-card-dc {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, i, .nav-link, .dropdown-item {
+  transition: color 0.3s ease;
+}
+
+/* General Typography & Helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-heading-text);
+  font-weight: 700;
+}
+a { color: var(--primary-purple); text-decoration: none; }
+a:hover { color: var(--primary-hover-purple); opacity: 0.85; }
+p { line-height: 1.75; margin-bottom: 1.2rem; font-size: 1rem; }
+.small, small { font-size: 0.9rem; }
+
+/* Global Animation Styles */
+.animate-on-scroll { opacity: 0; transition-property: opacity, transform; transition-timing-function: ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+/* ... (animation styles kept here for global use) ... */

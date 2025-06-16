@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+/* === CONSISTENT BRANDING: Using your purple color palette === */
+:root {
+  --primary-white: #fff;
+  --primary-purple: #007bff;
+  --primary-light-purple: #66b2ff;
+  --primary-dark-blue: #232931;
+  --primary-light-gray: #f8f9fa;
+  --primary-medium-gray: #e9ecef;
+  --primary-heading-text: #2c3e50;
+  --primary-gray-text: #6c757d;
+  --page-font: 'Poppins', sans-serif;
+  --border-radius: 12px;
+  --shadow: 0 8px 25px rgba(73, 23, 98, 0.09);
+}
+
+.media-page {
+  font-family: var(--page-font);
+  background-color: var(--primary-light-gray);
+  color: var(--primary-dark-text);
+  overflow-x: hidden;
+}
+
+/* 1. Hero Section Styling */
+.media-hero {
+  position: relative; height: 60vh; min-height: 450px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--primary-white); background-size: cover; background-position: center; padding: 2rem;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-title { font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; }
+.hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 400; line-height: 1.7; text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+
+/* 2. Generic Section Styling */
+.section-header { text-align: center; margin-bottom: 2rem; }
+.section-title { font-size: 2.5rem; font-weight: 700; color: var(--primary-heading-text); }
+
+/* 3. The Interactive Tabbed Section */
+.services-section { padding: 5rem 2rem; }
+.tab-buttons-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  border: 1px solid var(--primary-medium-gray);
+  background-color: var(--primary-white);
+  color: var(--primary-purple);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tab-button.active, .tab-button:hover {
+  background-color: var(--primary-purple);
+  color: var(--primary-white);
+  border-color: var(--primary-purple);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.tab-content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--primary-white);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  min-height: 200px; /* Ensures a consistent size */
+}
+.tab-content-list { list-style: none; padding: 0; margin: 0; }
+.tab-content-list li {
+  position: relative; padding-left: 2rem; margin-bottom: 1rem; color: var(--primary-gray-text); font-size: 1.1rem; line-height: 1.6;
+}
+.tab-content-list li::before {
+  content: '\f00c'; /* Font Awesome checkmark */
+  font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  position: absolute; left: 0; top: 5px;
+  color: var(--primary-light-purple);
+}
+
+/* 4. "Why Us" Section Styling */
+.why-us-section { padding: 5rem 2rem; background-color: var(--primary-white); }
+.why-us-content { display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 4rem; max-width: 1100px; margin: 0 auto; }
+.why-us-image-container img { width: 100%; height: auto; border-radius: var(--border-radius); box-shadow: var(--shadow); }
+.why-us-list-container { display: flex; flex-direction: column; gap: 1.5rem; }
+.why-us-list-container .section-title { text-align: left; margin-bottom: 1rem; }
+.why-us-item {
+  display: flex; align-items: center; gap: 1rem; font-weight: 600; color: var(--primary-purple); font-size: 1.1rem;
+}
+.why-us-item i {
+  font-size: 1.5rem; color: var(--primary-light-purple); width: 25px; text-align: center;
+}
+
+/* 5. Animation Classes */
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fade-in-up { transform: translateY(50px) scale(0.95); }
+.fade-in-down { transform: translateY(-50px) scale(0.95); }
+.fade-in-left { transform: translateX(-50px) scale(0.95); }
+.fade-in-right { transform: translateX(50px) scale(0.95); }
+
+/* 6. Responsive Design */
+@media (max-width: 992px) {
+  .why-us-content { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  .why-us-list-container .section-title { text-align: center; }
+  .why-us-item { justify-content: center; }
+}
+@media (max-width: 768px) {
+  .services-section { padding: 3rem 1rem; }
+  .section-title { font-size: 2rem; }
+}

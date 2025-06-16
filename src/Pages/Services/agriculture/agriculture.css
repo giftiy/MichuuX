@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+/* === BRAND COLORS - NO GREEN ACCENT === */
+:root {
+  --primary-white: #fff;
+  --primary-purple: #007bff;
+  --primary-light-purple: #66b2ff;
+  --primary-dark-blue: #232931;
+  --primary-light-gray: #f8f9fa;
+  --primary-heading-text: #2c3e50;
+  --primary-gray-text: #6c757d;
+  --agriculture-font: 'Poppins', sans-serif;
+  --border-radius: 12px;
+  --shadow: 0 8px 25px rgba(73, 23, 98, 0.09);
+  --shadow-hover: 0 12px 30px rgba(73, 23, 98, 0.15);
+}
+
+.agriculture-page {
+  font-family: var(--agriculture-font);
+  background-color: var(--primary-light-gray);
+  color: var(--primary-dark-text);
+  overflow-x: hidden;
+}
+
+/* 1. Hero Section Styling */
+.hero-link-wrapper {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.agriculture-hero {
+  position: relative; height: 60vh; min-height: 450px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--primary-white); background-size: cover; background-position: center; padding: 2rem;
+}
+
+.hero-link-wrapper:hover .hero-overlay {
+  opacity: 0.75;
+}
+.hero-content { position: relative; z-index: 2; max-width: 900px; transition: transform 0.3s ease; }
+.hero-link-wrapper:hover .hero-content {
+  transform: scale(1.02);
+}
+.hero-title { font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; }
+.hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 400; line-height: 1.7; text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+
+/* 2. Generic Section Styling */
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-title { font-size: 2.5rem; font-weight: 700; color: var(--primary-heading-text); }
+
+/* 3. The Services Grid */
+.services-section { padding: 5rem 2rem; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.service-card {
+  background: var(--primary-white); border-radius: var(--border-radius); padding: 2rem; box-shadow: var(--shadow); border-left: 4px solid transparent; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-light-purple); /* Replaced green with purple */
+}
+.service-card-icon { font-size: 2.5rem; color: var(--primary-light-purple); margin-bottom: 1rem; } /* Replaced green with purple */
+.service-card-title { font-size: 1.3rem; font-weight: 600; color: var(--primary-purple); margin-bottom: 1rem; }
+.service-card-items { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+.service-card-items li {
+  position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-gray-text); font-size: 0.95rem;
+}
+.service-card-items li::before {
+  content: '\f138'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 2px;
+  color: var(--primary-light-purple); /* Replaced green with purple */
+}
+
+/* 4. "Why Us" Section Styling */
+.why-us-section { padding: 4rem 2rem 5rem 2rem; background-color: var(--primary-white); }
+.why-us-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 1100px; margin: 0 auto; }
+.why-us-image-container img { width: 100%; height: auto; border-radius: var(--border-radius); box-shadow: var(--shadow); }
+.why-us-list-container { display: flex; flex-direction: column; gap: 1.5rem; }
+.why-us-item {
+  display: flex; align-items: center; gap: 1rem; font-weight: 600; padding: 1rem; border-radius: var(--border-radius); color: var(--primary-purple); transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.why-us-item:hover { background-color: var(--primary-light-gray); transform: translateX(5px); }
+.why-us-item i { font-size: 1.5rem; color: var(--primary-light-purple); width: 25px; text-align: center; } /* Replaced green with purple */
+
+/* 5. Animation Classes */
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fade-in-up { transform: translateY(60px) scale(0.95); }
+.fade-in-down { transform: translateY(-60px) scale(0.95); }
+.fade-in-left { transform: translateX(-60px) scale(0.95); }
+.fade-in-right { transform: translateX(60px) scale(0.95); }
+
+/* 6. Responsive Design */
+@media (max-width: 900px) {
+  .why-us-content { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (max-width: 768px) {
+  .services-section { padding: 3rem 1rem; }
+  .section-title { font-size: 2rem; }
+}

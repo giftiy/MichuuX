@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+:root {
+  --primary-white: #fff;
+  --primary-purple: #007bff;
+  --primary-light-purple: #66b2ff;
+  --primary-dark-blue: #232931;
+  --primary-light-gray: #f8f9fa;
+  --primary-heading-text: #2c3e50;
+  --primary-gray-text: #6c757d;
+  --software-accent-magenta: #403b86;
+  --page-font: 'Poppins', sans-serif;
+  --border-radius: 12px;
+  --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.software-page {
+  font-family: var(--page-font); background-color: var(--primary-light-gray); overflow-x: hidden;
+}
+.software-hero {
+  position: relative; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--primary-white); background-size: cover; background-position: center; padding: 2rem;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+.hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); margin-bottom: 1rem; }
+.hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 400; line-height: 1.7; text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); }
+.services-section { padding: 5rem 2rem; }
+.services-container {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto;
+}
+.service-card {
+  background: var(--primary-white); border-radius: var(--border-radius); padding: 2rem; box-shadow: var(--shadow-light); transition: all 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-10px); box-shadow: var(--shadow-heavy);
+}
+.service-icon {
+  font-size: 2.5rem; color: var(--software-accent-magenta); margin-bottom: 1rem;
+}
+.service-title {
+  font-size: 1.4rem; font-weight: 600; color: var(--primary-purple); margin-bottom: 0.75rem;
+}
+.service-text {
+  font-size: 1rem; color: var(--primary-gray-text); line-height: 1.6;
+}
+/* Making the grid more dynamic on hover */
+.services-container:hover > .service-card:not(:hover) {
+  opacity: 0.7; transform: scale(0.98);
+}
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fade-in-up { transform: translateY(50px); }
+@media (max-width: 768px) {
+  .services-container { grid-template-columns: 1fr; }
+}
